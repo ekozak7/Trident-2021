@@ -1,6 +1,6 @@
 Read Me
 
-MCTSunknown.m uses the MCTS with UCT selection policy in a search grid with one target placed from the uniform random distribution
+MCTSunknown.m uses the MCTS with UCT selection policy and random walk default policy in a search grid with one target placed from the uniform random distribution
 
 randtarget2.m places target
 optsteps.m calculates the optimal steps to the target
