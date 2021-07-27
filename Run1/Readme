@@ -1,0 +1,15 @@
+RevisedMCTS is the main file, all others are functions called within it
+
+The parameters are preset to: 
+T = 100 (trials)
+N = 40  (grid size)
+L = 100 (loops)
+c = 2   (exploration constant)
+rv = 1  (vision radius)
+TLimit = 10000  (stopping time if rw goes too long)
+
+SM is the values of sigma to be tested, currently set to {0, 1, ..., 10}
+
+When run, the program will display the trial number (t) as it progresses
+The final output is a table of Average Steps, Average Steps Over Optimal (ASOO), 
+Variance, and Average Time for each value of sigma in SM
