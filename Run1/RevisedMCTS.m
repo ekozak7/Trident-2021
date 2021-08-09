@@ -6,7 +6,7 @@ clear all, clc
 
 %% Parameters 
 
-T = 100; 
+T = 1; 
 N = 40; 
 M = N+1; 
 L = 100; 
@@ -31,7 +31,7 @@ MTime = zeros(sl,1);
 %% Run Trials
 
 for a = 1:sl
-    sigma = SM(a); 
+    sigma = SM(a) 
 tic
 for t = 1:T
  t
@@ -73,8 +73,9 @@ for t = 1:T
                  break
              end
              [sx1, sy1] = randmovetor(sx1, sy1, N); 
-             K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
+             %K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
          end
+         K(sx+1, sy+1) = K(sx+1, sy+1) + 1/count; 
      end
        
       if Nx(mod1(Sx+2,M), Sy+1) == 0  %right
@@ -91,8 +92,9 @@ for t = 1:T
                  break
              end
              [sx1, sy1] = randmovetor(sx1, sy1, N); 
-             K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
-         end   
+             %K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
+         end
+         K(sx+1, sy+1) = K(sx+1, sy+1) + 1/count; 
       end
      
       if Nx(Sx+1, mod1(Sy, M)) == 0  %down
@@ -109,8 +111,9 @@ for t = 1:T
                  break
              end
              [sx1, sy1] = randmovetor(sx1, sy1, N); 
-             K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
-         end   
+             %K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
+         end 
+         K(sx+1, sy+1) = K(sx+1, sy+1) + 1/count; 
       end
          
       if Nx(mod1(Sx,M), Sy+1) == 0  %left
@@ -127,8 +130,9 @@ for t = 1:T
                  break
              end
              [sx1, sy1] = randmovetor(sx1, sy1, N); 
-             K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
-         end   
+             %K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
+         end 
+         K(sx+1, sy+1) = K(sx+1, sy+1) + 1/count; 
       end
      
       %Run simulations
@@ -136,7 +140,8 @@ for t = 1:T
           sx = Sx; 
           sy = Sy; 
           Nx(Sx+1, Sy+1) = Nx(Sx+1, Sy+1) + 1;
-          Qx = 1./K; %Total reward
+          %Qx = 1./K; %Total reward
+          Qx = K; 
           UCT = Qx./Nx + c*sqrt(abs(log(Nx(Sx+1, Sy+1))./Nx));
           UCTi = zeros(1, 4); 
               UCTi(1) = UCT(sx+1, mod1(sy+2,M)); %up
@@ -165,16 +170,17 @@ for t = 1:T
                  break
              end
              [sx1, sy1] = randmovetor(sx1, sy1, N); 
-             K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
-         end 
+             %K(sx+1, sy+1) = K(sx+1, sy+1) + 1; %step count of selected node
+         end
+         K(sx+1, sy+1) = K(sx+1, sy+1) + 1/count; 
          
       end %end loops
       
       
      %Play best move
         %Use Max Reward
-        Qx = 1./K;  %Total reward
-        QN = Qx./Nx; %Average reward
+        %Qx = 1./K;  %Total reward
+        QN = K./Nx; %Average reward
         Qi(1) = QN(Sx+1, mod1(Sy+2, M)); 
         Qi(2) = QN(mod1(Sx+2, M), Sy+1); 
         Qi(3) = QN(Sx+1, mod1(Sy, M)); 
