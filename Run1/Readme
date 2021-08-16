@@ -2,6 +2,7 @@ RevisedMCTSUniform runs the same way, but using the uniform target distribution 
 The code will automatically stop running trials for a given N if one run takes more than TLimit steps. 
 It will output and error message and readjust the averages to account for how many trials it missed. 
 Finally, when all N values have been tested, the code will print out all of the data in a table. 
+The one additional file used for this is randtargnorm.m
 
 
 RevisedMCTS is the main file, all others are functions called within it
